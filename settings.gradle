@@ -1,0 +1,2 @@
+include ':app', ':ffmpegExec'
+project(':ffmpegExec').projectDir = new File('ffmpegExecuter')
