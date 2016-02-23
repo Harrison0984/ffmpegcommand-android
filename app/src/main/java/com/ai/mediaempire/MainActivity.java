@@ -27,14 +27,31 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String mp4File = "/storage/emulated/0/DCIM/Camera/VID_20151125_133604.mp4";
+        String mp4File = "/storage/emulated/0/DCIM/Camera/VID_20151130_160958.mp4";
         String pngFile = "/storage/emulated/0/DCIM/Camera/test.png";
+        String tstFile = "/storage/emulated/0/DCIM/Camera/test.mp4";
 
         ffmpegCommand = new FFmpegExecuter(getApplicationContext());
         ffmpegCommand.init();
+        ffmpegCommand.putCommand("-f");
+        ffmpegCommand.putCommand(mp4File);
+        ffmpegCommand.putCommand("-vf");
+        ffmpegCommand.putCommand("-i");
+        ffmpegCommand.putCommand("drawtext=\"fontcolor=white\"");
+        ffmpegCommand.putCommand("-an");
+        ffmpegCommand.putCommand("-y");
+        ffmpegCommand.putCommand(tstFile);
+
+        try {
+            ffmpegCommand.executeCommand();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //String outFile = mergePng(mp4File, pngFile);
         //String outFile = mergeMp4(mp4File, mp4File);
+
+        //Log.d("", outFile);
     }
 
     public String mergePng(String mp4Path, String pngPath) {
